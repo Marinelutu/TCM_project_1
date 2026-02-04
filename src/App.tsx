@@ -11,9 +11,11 @@ import ScrollAnimation from './components/ScrollAnimation';
 
 import QiTrail from './components/QiTrail';
 import Testimonials from './components/Testimonials';
+import DiagnosticFunnel from './components/DiagnosticFunnel';
 
 function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [isDiagnosticOpen, setIsDiagnosticOpen] = useState(false);
 
   const handleBookConsultation = () => {
     setIsBookingModalOpen(true);
@@ -54,6 +56,11 @@ function App() {
       <BookingModal
         isOpen={isBookingModalOpen}
         onClose={() => setIsBookingModalOpen(false)}
+      />
+
+      <DiagnosticFunnel
+        isOpen={isDiagnosticOpen}
+        onClose={() => setIsDiagnosticOpen(false)}
       />
     </div>
   );
