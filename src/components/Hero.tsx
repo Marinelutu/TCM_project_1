@@ -1,15 +1,18 @@
 import { ArrowRight } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { getCurrentSolarTerm, SolarTerm } from '../utils/solarTerms';
 
 interface HeroProps {
-  onBookConsultation: () => void;
+  onStartDiagnostic: () => void;
 }
 
-export default function Hero({ onBookConsultation }: HeroProps) {
+export default function Hero({ onStartDiagnostic }: HeroProps) {
   const parallaxRef = useRef<HTMLDivElement>(null);
   const lightRef = useRef<HTMLDivElement>(null);
+  const [term, setTerm] = useState<SolarTerm | null>(null);
 
   useEffect(() => {
+    setTerm(getCurrentSolarTerm());
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
@@ -62,22 +65,35 @@ export default function Hero({ onBookConsultation }: HeroProps) {
       />
 
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center pt-20">
+        {term && (
+          <div className="mb-6 animate-fade-in">
+            <span className="px-4 py-1.5 rounded-full border border-soft-gold/30 bg-soft-gold/10 text-soft-gold text-[10px] tracking-[0.3em] uppercase font-medium">
+              Solar Term: {term.name} — {term.translation}
+            </span>
+          </div>
+        )}
         <h1 className="font-display text-5xl md:text-8xl font-thin mb-8 leading-tight tracking-wide animate-fade-in drop-shadow-xl text-transparent bg-clip-text bg-gradient-to-br from-beige via-stone-100 to-stone-400">
           Restore <span className="italic font-normal text-stone-50">Balance</span>.<br />
           Heal Naturally.
         </h1>
-        <p className="text-xl md:text-2xl mb-12 leading-relaxed opacity-90 max-w-3xl mx-auto font-light tracking-widest animate-fade-in-delay text-stone-200">
+        <p className="text-xl md:text-2xl mb-4 leading-relaxed opacity-90 max-w-3xl mx-auto font-light tracking-widest animate-fade-in-delay text-stone-200">
           Essential wellness through time-honored Traditional Chinese Medicine.
         </p>
 
+        {term && (
+          <p className="text-sm md:text-base mb-12 text-soft-gold/80 italic font-light tracking-wide animate-fade-in-delay-2 max-w-2xl mx-auto">
+            "Sensei's Seasonal Note: {term.recommendation}"
+          </p>
+        )}
+
         <button
-          onClick={onBookConsultation}
+          onClick={onStartDiagnostic}
           className="group relative px-10 py-4 bg-transparent overflow-hidden rounded-full transition-all duration-500 hover:shadow-[0_0_50px_-10px_rgba(253,230,138,0.3)] border border-beige/20 hover:border-soft-gold/50 animate-fade-in-delay-2"
         >
           <div className="absolute inset-0 w-full h-full bg-white/5 group-hover:bg-soft-gold/10 transition-colors duration-500 blur-sm" />
           <div className="relative flex items-center gap-4 text-beige tracking-[0.2em] uppercase text-sm font-medium group-hover:text-soft-gold transition-colors duration-300">
-            Book Consultation
+            Start AI Diagnostic
             <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
           </div>
         </button>

@@ -12,6 +12,9 @@ import ScrollAnimation from './components/ScrollAnimation';
 import QiTrail from './components/QiTrail';
 import Testimonials from './components/Testimonials';
 import DiagnosticFunnel from './components/DiagnosticFunnel';
+import RitualVideo from './components/RitualVideo';
+import QiTracker from './components/QiTracker';
+import PractitionerDashboard from './components/PractitionerDashboard';
 
 function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
@@ -25,7 +28,7 @@ function App() {
     <div className="min-h-screen bg-beige selection:bg-gold/30">
       <QiTrail />
 
-      <Hero onBookConsultation={handleBookConsultation} />
+      <Hero onStartDiagnostic={() => setIsDiagnosticOpen(true)} />
 
       <ScrollAnimation>
         <TrustCredentials />
@@ -49,6 +52,18 @@ function App() {
 
       <ScrollAnimation>
         <FinalCTA onBookConsultation={handleBookConsultation} />
+      </ScrollAnimation>
+
+      <ScrollAnimation>
+        <RitualVideo />
+      </ScrollAnimation>
+
+      <ScrollAnimation>
+        <QiTracker />
+      </ScrollAnimation>
+
+      <ScrollAnimation>
+        <PractitionerDashboard />
       </ScrollAnimation>
 
       <StickyCTA onClick={handleBookConsultation} />

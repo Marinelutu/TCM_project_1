@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronRight, ChevronLeft, Camera, Check, RefreshCw } from 'lucide-react';
+import { ChevronLeft, Camera, Check, RefreshCw } from 'lucide-react';
 
 interface Question {
     id: string;
