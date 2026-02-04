@@ -37,15 +37,15 @@ export default function Services() {
   return (
     <section className="relative py-32 bg-beige overflow-hidden">
       {/* Top Organic Divider (Wave) */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%]">
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%]" aria-hidden="true">
         <svg className="relative block w-[calc(100%+1.3px)] h-[150px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" className="fill-beige"></path>
         </svg>
       </div>
 
       {/* Background Ambience */}
-      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none mix-blend-multiply" />
-      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[120px] pointer-events-none mix-blend-multiply" />
+      <div className="absolute top-1/4 left-0 w-[500px] h-[500px] bg-secondary/5 rounded-full blur-[100px] pointer-events-none mix-blend-multiply" aria-hidden="true" />
+      <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-gold/5 rounded-full blur-[120px] pointer-events-none mix-blend-multiply" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-24">
@@ -87,10 +87,10 @@ export default function Services() {
       </div>
 
       {/* Floating Petals/Leaves (Decoration) */}
-      <div className="absolute top-40 right-10 opacity-20 animate-float pointer-events-none">
+      <div className="absolute top-40 right-10 opacity-20 animate-float pointer-events-none" aria-hidden="true">
         <Leaf className="w-12 h-12 text-secondary rotate-45" />
       </div>
-      <div className="absolute bottom-20 left-20 opacity-10 animate-pulse-slow pointer-events-none">
+      <div className="absolute bottom-20 left-20 opacity-10 animate-pulse-slow pointer-events-none" aria-hidden="true">
         <Leaf className="w-24 h-24 text-gold -rotate-12" />
       </div>
     </section>

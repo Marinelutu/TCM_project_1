@@ -1,21 +1,31 @@
 import { ArrowRight } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface HeroProps {
   onBookConsultation: () => void;
 }
 
 export default function Hero({ onBookConsultation }: HeroProps) {
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const parallaxRef = useRef<HTMLDivElement>(null);
+  const lightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) return;
+
     const handleMouseMove = (e: MouseEvent) => {
-      // Normalized coordinates -1 to 1
-      setMousePos({
-        x: (e.clientX / window.innerWidth) * 2 - 1,
-        y: (e.clientY / window.innerHeight) * 2 - 1
-      });
+      const x = (e.clientX / window.innerWidth) * 2 - 1;
+      const y = (e.clientY / window.innerHeight) * 2 - 1;
+
+      if (parallaxRef.current) {
+        parallaxRef.current.style.transform = `translate(${x * -15}px, ${y * -15}px) scale(1.1)`;
+      }
+      if (lightRef.current) {
+        lightRef.current.style.transform = `translate(calc(-50% + ${x * 40}px), calc(-50% + ${y * 40}px))`;
+      }
     };
+
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
@@ -24,27 +34,30 @@ export default function Hero({ onBookConsultation }: HeroProps) {
     <section className="relative h-screen min-h-[700px] flex items-center justify-center overflow-hidden bg-primary text-beige">
       {/* Layer 1: Parallax Background */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-100 ease-out"
+        ref={parallaxRef}
+        className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-[400ms] ease-out will-change-transform"
         style={{
-          backgroundImage: 'linear-gradient(to bottom, rgba(2, 44, 34, 0.4), rgba(2, 44, 34, 0.8)), url("https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80")', // Misty forest
-          transform: `translate(${mousePos.x * -15}px, ${mousePos.y * -15}px) scale(1.1)`
+          backgroundImage: 'linear-gradient(to bottom, rgba(2, 44, 34, 0.4), rgba(2, 44, 34, 0.8)), url("https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80")',
+          transform: 'scale(1.1)'
         }}
       />
 
-      {/* Layer 2: Moving Mist (Simulation with noise/gradients) */}
-      <div className="absolute inset-0 z-0 opacity-20 bg-noise mix-blend-overlay" />
-      <div className="absolute -inset-[100%] z-0 animate-fog-move opacity-30 select-none pointer-events-none">
+      {/* Layer 2: Moving Mist */}
+      <div className="absolute inset-0 z-0 opacity-20 bg-noise mix-blend-overlay pointer-events-none" aria-hidden="true" />
+      <div className="absolute -inset-[100%] z-0 animate-fog-move opacity-30 select-none pointer-events-none" aria-hidden="true">
         <div className="w-full h-full bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent blur-3xl transform scale-150" />
       </div>
 
       {/* Layer 3: Light Follow Effect */}
       <div
-        className="absolute w-[800px] h-[800px] rounded-full pointer-events-none mix-blend-soft-light transition-transform duration-200 ease-out"
+        ref={lightRef}
+        className="absolute w-[800px] h-[800px] rounded-full pointer-events-none mix-blend-soft-light transition-transform duration-[600ms] ease-out will-change-transform"
+        aria-hidden="true"
         style={{
           background: 'radial-gradient(circle, rgba(253, 230, 138, 0.2) 0%, transparent 70%)',
           left: '50%',
           top: '50%',
-          transform: `translate(calc(-50% + ${mousePos.x * 40}px), calc(-50% + ${mousePos.y * 40}px))`
+          transform: 'translate(-50%, -50%)'
         }}
       />
 
@@ -71,7 +84,7 @@ export default function Hero({ onBookConsultation }: HeroProps) {
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float opacity-60">
+      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-float opacity-60 pointer-events-none" aria-hidden="true">
         <p className="text-[10px] tracking-[0.3em] text-beige/80 mb-4 text-center uppercase">Scroll to Discover</p>
         <div className="w-[1px] h-12 bg-gradient-to-b from-transparent via-beige/50 to-transparent mx-auto" />
       </div>

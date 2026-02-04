@@ -9,6 +9,9 @@ import BookingModal from './components/BookingModal';
 import StickyCTA from './components/StickyCTA';
 import ScrollAnimation from './components/ScrollAnimation';
 
+import QiTrail from './components/QiTrail';
+import Testimonials from './components/Testimonials';
+
 function App() {
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
@@ -17,7 +20,9 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5EFE6]">
+    <div className="min-h-screen bg-beige selection:bg-gold/30">
+      <QiTrail />
+
       <Hero onBookConsultation={handleBookConsultation} />
 
       <ScrollAnimation>
@@ -26,6 +31,10 @@ function App() {
 
       <ScrollAnimation>
         <Services />
+      </ScrollAnimation>
+
+      <ScrollAnimation>
+        <Testimonials />
       </ScrollAnimation>
 
       <ScrollAnimation>

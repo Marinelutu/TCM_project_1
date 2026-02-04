@@ -4,7 +4,7 @@ export default function About() {
   return (
     <section className="relative py-32 bg-white overflow-hidden">
       {/* Top Organic Divider (Wave) */}
-      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%]">
+      <div className="absolute top-0 left-0 w-full overflow-hidden leading-[0] transform -translate-y-[99%]" aria-hidden="true">
         <svg className="relative block w-[calc(100%+1.3px)] h-[120px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
           <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" className="fill-white" opacity="0.3"></path>
           <path d="M0,0V15.81C13,36.92,54.55,50.15,88.42,48.23c95.21-5.39,150.36-67.68,261-68,110.15-.3,165.79,62.63,261,68a275.64,275.64,0,0,0,88.42-12.42V0Z" className="fill-white"></path>
@@ -15,7 +15,7 @@ export default function About() {
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div className="relative group">
-            <div className="absolute -inset-4 bg-gradient-to-tr from-secondary/20 to-gold/20 rounded-[2rem] blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute -inset-4 bg-gradient-to-tr from-secondary/20 to-gold/20 rounded-[2rem] blur-xl opacity-70 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
 
             <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden shadow-2xl transform transition-transform duration-700 group-hover:scale-[1.02]">
               <div className="absolute inset-0 bg-primary/10 mix-blend-multiply z-10" />
@@ -23,13 +23,14 @@ export default function About() {
                 src="https://images.unsplash.com/photo-1600618528240-fb9fc964b853?auto=format&fit=crop&q=80"
                 alt="Dr. Mei Lin Zhao"
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
               {/* Overlay with noise */}
-              <div className="absolute inset-0 bg-noise opacity-10" />
+              <div className="absolute inset-0 bg-noise opacity-10" aria-hidden="true" />
             </div>
 
-            <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-gold/10 rounded-full blur-3xl opacity-60 -z-10 animate-pulse-slow" />
-            <div className="absolute -top-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl opacity-60 -z-10" />
+            <div className="absolute -bottom-10 -right-10 w-48 h-48 bg-gold/10 rounded-full blur-3xl opacity-60 -z-10 animate-pulse-slow" aria-hidden="true" />
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-secondary/10 rounded-full blur-3xl opacity-60 -z-10" aria-hidden="true" />
           </div>
 
           <div>
