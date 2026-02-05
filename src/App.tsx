@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 import Hero from './components/Hero';
 import TrustCredentials from './components/TrustCredentials';
 import Services from './components/Services';
@@ -77,6 +78,8 @@ function App() {
         isOpen={isDiagnosticOpen}
         onClose={() => setIsDiagnosticOpen(false)}
       />
+
+      <Analytics />
     </div>
   );
 }

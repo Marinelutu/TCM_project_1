@@ -57,7 +57,7 @@ export default function DiagnosticFunnel({ isOpen, onClose }: { isOpen: boolean;
     const [currentId, setCurrentId] = useState('start');
     const [history, setHistory] = useState<string[]>([]);
     const [isScanning, setIsScanning] = useState(false);
-    const [result, setResult] = useState<any>(null);
+    const [result, setResult] = useState<{ diagnosis: string; recommendation: string; severity: string } | null>(null);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
     const currentQuestion = QUESTIONS[currentId];
